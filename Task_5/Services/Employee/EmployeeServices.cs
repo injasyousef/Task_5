@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Task_5.Models;
+using Task3.Cash;
 
 namespace Task_5.Services.Employee
 {
@@ -57,6 +58,11 @@ namespace Task_5.Services.Employee
             }
         }
 
-     
+        public void SendMessage(string email)
+        {
+            Console.WriteLine("the message send to email " + email + " at " + DateTime.Now);
+        }
+
+
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Hangfire;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Task_5.Services.Employee;
 
@@ -54,6 +55,13 @@ namespace Task_5.Controllers
         {
             await _employeeServices.DeleteEmployeeAsync(empId);
             return NoContent();
+        }
+
+        [HttpGet("SendMessage")]
+        public IActionResult SendMessage(string email)
+        {
+            RecurringJob.AddOrUpdate(() => _employeeServices.SendMessage(email), Cron.Monthly);
+            return Ok();
         }
     }
 }

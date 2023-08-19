@@ -9,5 +9,6 @@ namespace Task_5.Services.Employee
         Task<Tables.Employee> AddEmployeeAsync(Tables.Employee employee);
         Task UpdateEmployeeAsync(int empId, Tables.Employee updatedEmployee);
         Task DeleteEmployeeAsync(int empId);
+        void SendMessage(string email);
     }
 }

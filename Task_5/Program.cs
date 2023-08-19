@@ -1,8 +1,12 @@
+using Hangfire;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
 using Task_5;
+using Task_5.Services.City;
 using Task_5.Services.Employee;
+using Task3.Cash;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,11 +25,16 @@ builder.Services.AddControllers()
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddMemoryCache();
 builder.Services.AddSwaggerGen(); builder.Services.AddScoped<IEmployeeServices, EmployeeServices>();
-//builder.Services.AddSwaggerGen(); builder.Services.AddScoped<ICourseService, CourseService>();
+builder.Services.AddSwaggerGen(); builder.Services.AddScoped<ICityService, CityService>();
+builder.Services.AddScoped<ICache, MemoryCache>();
 builder.Services.AddAutoMapper(typeof(Program));
 
+builder.Services.AddHangfire(x => x.UseSqlServerStorage(connStr));
+builder.Services.AddHangfireServer();
 
+builder.Services.AddCors();
 
 var app = builder.Build();
 
@@ -36,6 +45,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCors(c => c.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
 
 app.UseAuthorization();
 

@@ -50,6 +50,14 @@
               "target": "Package",
               "version": "[12.0.1, )"
             },
+            "Hangfire": {
+              "target": "Package",
+              "version": "[1.8.5, )"
+            },
+            "Hangfire.Core": {
+              "target": "Package",
+              "version": "[1.8.5, )"
+            },
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
               "version": "[7.0.9, )"
