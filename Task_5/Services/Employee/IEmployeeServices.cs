@@ -1,9 +1,11 @@
-﻿namespace Task_5.Services.Employee
+﻿using Task_5.Models;
+
+namespace Task_5.Services.Employee
 {
     public interface IEmployeeServices
     {
         Task<Tables.Employee> GetEmployeeByIdAsync(int empId);
-        Task<List<Tables.Employee>> GetAllEmployeesAsync();
+        Task<List<EmployeeModel>> GetAllEmployeesAsync();
         Task<Tables.Employee> AddEmployeeAsync(Tables.Employee employee);
         Task UpdateEmployeeAsync(int empId, Tables.Employee updatedEmployee);
         Task DeleteEmployeeAsync(int empId);

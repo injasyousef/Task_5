@@ -1,14 +1,18 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
+using Task_5.Models;
 
 namespace Task_5.Services.Employee
 {
     public class EmployeeServices : IEmployeeServices
     {
         private readonly ApplicationDBContext _Context;
+        private readonly IMapper _mapper;
 
-        public EmployeeServices(ApplicationDBContext dbContext)
+        public EmployeeServices(ApplicationDBContext dbContext, IMapper mapper)
         {
             _Context = dbContext;
+            _mapper = mapper;
         }
 
         public async Task<Tables.Employee> GetEmployeeByIdAsync(int empId)
@@ -16,9 +20,11 @@ namespace Task_5.Services.Employee
             return await _Context.Employee.FirstOrDefaultAsync(e => e.empId == empId);
         }
 
-        public async Task<List<Tables.Employee>> GetAllEmployeesAsync()
+        public async Task<List<EmployeeModel>> GetAllEmployeesAsync()
         {
-            return await _Context.Employee.ToListAsync();
+            var list = await _Context.Employee.Include(c => c.city).ToListAsync();
+            var result = _mapper.Map<List<EmployeeModel>>(list);
+            return result;
         }
 
         public async Task<Tables.Employee> AddEmployeeAsync(Tables.Employee employee)

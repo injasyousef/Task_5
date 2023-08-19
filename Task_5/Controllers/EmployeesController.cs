@@ -8,11 +8,11 @@ namespace Task_5.Controllers
     [ApiController]
     public class EmployeesController : ControllerBase
     {
-        private readonly EmployeeServices _employeeServices;
+        private readonly IEmployeeServices _employeeServices;
 
 
 
-        public EmployeesController(EmployeeServices employeeServices)
+        public EmployeesController(IEmployeeServices employeeServices)
         {
             _employeeServices = employeeServices;
         }

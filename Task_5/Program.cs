@@ -23,6 +23,7 @@ builder.Services.AddControllers()
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(); builder.Services.AddScoped<IEmployeeServices, EmployeeServices>();
 //builder.Services.AddSwaggerGen(); builder.Services.AddScoped<ICourseService, CourseService>();
+builder.Services.AddAutoMapper(typeof(Program));
 
 
 
